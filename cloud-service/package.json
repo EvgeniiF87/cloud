@@ -1,5 +1,5 @@
 {
-  "name": "green-api",
+  "name": "sevice-cloud",
   "version": "1.0.0",
   "description": "service cloud",
   "engines": {
@@ -13,7 +13,7 @@
     }
   },
   "scripts": {
-    "dev": "npx nodemon",
+    "dev": "npx nodemon",  
     "build": "tsc -w",
     "test": "jest -c ./jest.unit.json",
     "lint": "npx eslint ./src",

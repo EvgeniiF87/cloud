@@ -11,10 +11,21 @@ export class UploadController {
   }
 
   /** Получаем сообщение c main server */
-  async processTask(task: { action: string; payload?: any }) {
+  async processTask(task: { action: string; payload?: any; pattern?: string; }) {
     let result = null;
-
+ 
     try {
+
+      if (task.pattern === 'hello') { 
+        const res = {
+          data: { message: 'test return success' },
+          result: 'success',
+          message: 'test return success',
+        }
+        result =  res
+      }
+
+
       switch (task.action) {
         case 'createImage':
           result = await this.createImage(task.payload);
@@ -25,8 +36,8 @@ export class UploadController {
         case 'changeImage':
           result = await this.changeImage(task.payload);
           break;
-        default:
-          throw new Error('Invalid task');
+        // default:
+        //   throw new Error('Invalid task');
       }
 
       return result;

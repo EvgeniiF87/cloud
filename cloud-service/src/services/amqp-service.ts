@@ -6,7 +6,8 @@ import { logger } from '../utils/loger.js';
 export class UploadsAmqpService {
   private controller: UploadController;
   private queueName = 'upload-api';
-  private urlAmqp = 'amqp://localhost';
+  private urlAmqp = 'amqp://78.24.180.193:5672';
+  // private urlAmqp = 'amqp://localhost:5672';
 
   constructor() {
     this.controller = new UploadController()
@@ -31,7 +32,7 @@ export class UploadsAmqpService {
 
         const result = await this.controller.processTask(task);
         logger.info('Microservice Uploads completed task!');
-
+   
         /** Помещение результата обработки задания в очередь */
         channel.sendToQueue(message.properties.replyTo, Buffer.from(JSON.stringify(result)), {
           correlationId: message.properties.correlationId,
